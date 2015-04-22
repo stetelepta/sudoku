@@ -1,14 +1,9 @@
 "use strict";
 
 var smokesignals = require('smokesignals');
-var POSSIBILITIES = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+var settings = require('./settings.js');
 
-/*global document*/
 var cell = {
-        x: undefined,
-        y: undefined,
-        value: undefined,
-        p: undefined,
         /**
          * create instance of cell using protypal inheritance, see:
          * http://aaditmshah.github.io/why-prototypal-inheritance-matters/#constructors_vs_prototypes
@@ -17,21 +12,14 @@ var cell = {
          */
         create: function (x, y) {
             var self = Object.create(this);
-            self.initialize();
             self.x = x;
             self.y = y;
-            return self;
-        },
-        /**
-         * initialize new instance
-         * @param {}
-         * @returns {}
-         */
-        initialize: function () {
-            // make cell a event emitter
-            smokesignals.convert(this);
+            self.p = settings.cell.POSSIBILITIES.slice(0);
 
-            this.p = POSSIBILITIES.slice(0);
+            // make cell a event emitter
+            smokesignals.convert(self);
+
+            return self;
         },
         /**
          * remove possibily for this cell
@@ -41,26 +29,25 @@ var cell = {
         del: function (nr) {
             var index = this.p.indexOf(nr);
             if (index >= 0) {
-                var removedItem = this.p.splice(index, 1);
-                //console.log('removed: ' + removedItem + ', p:[' + this.p + "]");
+                this.p.splice(index, 1);
                 if (this.p.length === 1) {
                     console.log('one possibility left: now set value, emit change event');
-                    this.emit('change', {target: this, value: this.p[0]});
+                    this.emit('change', {target: this, value: this.getValue() });
                 }
             } else {
-                throw "IndexError: '" + nr + "' does not exist in Array p:[" + this.p + "]";
+                throw 'IndexError: "' + nr + '"" does not exist in Array p:[' + this.p + ']';
             }
         },
         /**
-         * removes all possibilities for this cell, expect for passed nr
+         * removes all cell.POSSIBILITIES for this cell, expect for passed nr
          * @param {exceptNr}
          * @returns [deleted item] 
          */
         delAll: function (exceptNr) {
-            for (var i in POSSIBILITIES) {
-                if (POSSIBILITIES[i] !== exceptNr) {
-                    // console.log('now delete POSSIBILITIES[i]:' + POSSIBILITIES[i]);
-                    this.del(POSSIBILITIES[i]);
+            for (var i in settings.cell.POSSIBILITIES) {
+                if (settings.cell.POSSIBILITIES[i] !== exceptNr) {
+                    // console.log('now delete cell.POSSIBILITIES[i]:' + cell.POSSIBILITIES[i]);
+                    this.del(settings.cell.POSSIBILITIES[i]);
                 }
             }
         },
@@ -69,6 +56,11 @@ var cell = {
             // console.log('setValue, now emit event, this.value:' + this.value);
 
             this.delAll(nr);
+        },
+        getValue: function () {
+            if (this.p.length === 1) {
+                return this.p[0];
+            }
         }
 };
 
