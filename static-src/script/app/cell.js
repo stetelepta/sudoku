@@ -31,11 +31,12 @@ var cell = {
             if (index >= 0) {
                 this.p.splice(index, 1);
                 if (this.p.length === 1) {
-                    console.log('one possibility left: now set value, emit change event');
+                    //console.log('one possibility left: now set value, emit change event');
                     this.emit('change', {target: this, value: this.getValue() });
                 }
             } else {
-                throw 'IndexError: "' + nr + '"" does not exist in Array p:[' + this.p + ']';
+                // throw 'IndexError: "' + nr + '"" does not exist in Array p:[' + this.p + ']';
+                // perhaps try to prevent duplicate deletions by different sets in the future, for now allow it
             }
         },
         /**
