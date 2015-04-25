@@ -30,8 +30,8 @@ var set = {
             // on cell changed: update all cells in this set, remove possibility
             for (var i in this.cells) {
                 if (this.cells[i] !== evt.target) {
-                    // console.log(this.cells[i]);
-                    this.cells[i].del(evt.value);
+                    //console.log(this.cells[i]);
+                    this.cells[i].eliminate(evt.value);
                 } else {
                     //console.log('no need to update the cell that caused the change');
                 }

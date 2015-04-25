@@ -6,13 +6,13 @@ var settings = require('./settings.js');
 var cell = {
         /**
          * create instance of cell using protypal inheritance
-         * @param {x,y}
+         * @param {row,col}
          * @returns cell instance
          */
-        create: function (x, y) {
+        create: function (row, col) {
             var self = Object.create(this);
-            self.x = x;
-            self.y = y;
+            self.row = row;
+            self.col = col;
             self.p = settings.cell.possibilities.slice(0);
 
             // make cell a event emitter
@@ -25,7 +25,7 @@ var cell = {
          * @param {nr}
          * @returns [deleted item] 
          */
-        del: function (nr) {
+        eliminate: function (nr) {
             var index = this.p.indexOf(nr);
             if (index >= 0) {
                 this.p.splice(index, 1);
@@ -43,19 +43,18 @@ var cell = {
          * @param {exceptNr}
          * @returns [deleted item] 
          */
-        delAll: function (exceptNr) {
+        eliminateAll: function (exceptNr) {
             for (var i in settings.cell.possibilities) {
                 if (settings.cell.possibilities[i] !== exceptNr) {
-                    this.del(settings.cell.possibilities[i]);
+                    this.eliminate(settings.cell.possibilities[i]);
                 }
             }
         },
         setValue: function(nr) {
-            this.value = nr;
-            // console.log('setValue, now emit event, this.value:' + this.value);
+            //console.log('setValue, now emit event, this.value:' + this.value);
 
             // value is known, now delete all other possibilities
-            this.delAll(nr);
+            this.eliminateAll(nr);
         },
         /** getter for the value of the cell
          * @param {}

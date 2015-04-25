@@ -1,15 +1,19 @@
 (function () {
     "use strict";
     /*global document*/
-    var grid = require("./grid.js"),
-        app = {
+    var sudoku = require("./sudoku.js");
+    var samples = require("./samples.js");
+    var app = {
             /**
              * initialize new instance
              * @param {}
              * @returns {Object}
              */
             initialize: function () {
-                grid.initialize();
+                var s = sudoku.create();
+                s.setGrid(samples.simple);
+                s.solve();
+                s.plot();
             },
         };
     app.initialize();
