@@ -8,7 +8,6 @@
              * @param {}
              * @returns {Object}
              */
-
             initialize: function () {
                 grid.initialize();
             },

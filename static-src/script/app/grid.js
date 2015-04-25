@@ -108,6 +108,9 @@ var grid = {
                 }
             }
         },
+        /**
+         * create empty row sets
+         */
         createRows: function () {
             for (var i=0;i<=8;i++) {
                 var row = set.create(i, "row");
@@ -115,22 +118,45 @@ var grid = {
                 this.rows.push(row);
             }
         },
+        /**
+         * create empty column sets
+         */
         createColumns: function () {
             for (var i=0;i<=8;i++) {
                 this.columns.push(set.create(i, "column"));
             }
         },
+        /**
+         * create empty block sets
+         */
         createBlocks: function () {
             for (var i=0;i<=8;i++) {
                 this.blocks.push(set.create(i, "block"));
             }
         },
+        /**
+         * get column by cell coordinate
+         * @param {x, y}
+         * @returns {set instance}
+         */
         getColumn: function(x, y) {
             return this.columns[x];
         },
+        /**
+         * get row by cell coordinate
+         * @param {x, y}
+         * @returns {set instance}
+         */
         getRow: function(x, y) {
             return this.rows[y];
         },
+        /**
+         * get row by cell coordinate
+         * @param {x, y}
+         * @returns {set instance}
+         */
+        getBlock: function(x, y) {
+
         /* return the block given cell coordinates
          * blocks in array [b0, b1, .., b8]
          * blocks in sudoku grid:
@@ -139,7 +165,7 @@ var grid = {
             |b6, b7, b8|
          * 
          */
-        getBlock: function(x, y) {
+
             // first convert cell coordinates to block coordinates (0,0) -› (2,2) (divide by 3, floor result)
             // then to array index (block is wrapped modulo 3)
             return this.blocks[(Math.floor(y/3) * 3) + Math.floor(x/3)];
@@ -152,7 +178,7 @@ var grid = {
                     var cell = this.data[col][row];
                     var val = cell.getValue() || "";
                     var nrOptions = cell.p.length;
-                    if (nrOptions < 1) {
+                    if (nrOptions >  1) {
                         output += "<td>" + val + "<small>(" + cell.p + ")</small>" + "</td>";                        
                     } else {
                         output += "<td>" + val + "</td>";
