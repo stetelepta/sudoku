@@ -22,13 +22,21 @@
         padding: 0;
     }
     .sudoku td.initial {
-        background-color:#ccf;
+        background-color:#eef;
         font-weight: bold; 
+    }
+    .hide {
+        display:none;
     }
     </style>
 </head>
 <body>
 <h1>Sudoku helper!</h1>
+
+
+<button class="step">Next step</button>
+<button class="solve">Solve animated</button>
+<button class="pause hide">Pause</button>
 
 <div class="grid"></div>
 <script src="/js/app.min.js"></script>

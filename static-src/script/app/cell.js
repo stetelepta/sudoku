@@ -34,6 +34,7 @@ var cell = {
                     this.emit('change', {target: this, value: this.getValue() });
                 }
             } else {
+                this.emit('eliminate', {target: this, value: this.getValue() });
                 // would be better to prevent duplicate deletions by different sets, but for now allow it
                 // throw 'IndexError: "' + nr + '"" does not exist in Array p:[' + this.p + ']';
             }
