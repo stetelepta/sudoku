@@ -1,7 +1,7 @@
 (function () {
     "use strict";
     /*global document*/
-    var sudoku = require("./sudoku.js");
+    var sudoku = require("./sudoku/sudoku.js");
     var samples = require("./samples.js");
     var app = {
             /**
