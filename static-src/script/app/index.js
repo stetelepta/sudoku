@@ -33,15 +33,15 @@
                 animationQueue.logElm = document.querySelector('.log');
 
                 var colors = {
-                    neutral: '#fff',
-                    change: '#ff9',
-                    value: '#aaf',
-                    setvalue: '#aaf',
-                    eliminate: '#eef',
-                    changeInitial: 'eef',
-                    valueInitial: '#aaf',
-                    setvalueInitial: '#aaf',
-                    eliminateInitial: '#eef',
+                    neutral: '#000',
+                    change: '#CE7727',
+                    value: '#666',
+                    setvalue: '#ccc',
+                    eliminate: '#B4CA6E',
+                    changeInitial: '#ccc',
+                    valueInitial: '#666',
+                    setvalueInitial: '#666',
+                    eliminateInitial: '#333',
                 };
 
                 // loop through log, add animation object to queue

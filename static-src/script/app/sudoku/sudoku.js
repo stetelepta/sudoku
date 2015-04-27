@@ -4,7 +4,6 @@
 var cell = require('./cell.js');
 var set = require('./set.js');
 var smokesignals = require('smokesignals');
-var velocity = require('velocity-animate');
 
 var sudoku = {
         cells: [],      // 2D array, containing references to cell instances
@@ -170,15 +169,6 @@ var sudoku = {
          */
         onCellElimination: function (evt) {
             this.log.push({type:'eliminate', row: evt.target.row, col: evt.target.col, value: evt.value }) 
-        },
-        /* animate change of a cell
-         */
-        animateChange: function (cellElm) {
-            if (utils.hasClass(cellElm, "initial")) {
-                velocity(cellElm, { backgroundColor: '#aaf' }, 1000); // Velocity  
-            } else {
-                velocity(cellElm, { backgroundColor: '#ff9' }, 1000); // Velocity                
-            }
         },
         /* plot initial
          */

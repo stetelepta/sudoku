@@ -3,52 +3,20 @@
 <html class="no-js" lang="en">
 <head>
     <title>Sudoku helper</title>
-    <style>
-    table.sudoku {
-        border-collapse: collapse;
-        border: solid medium;
-    }
-    .sudoku tr:nth-of-type(3n) {
-        border-bottom: solid medium;
-    }
-    .sudoku td:nth-of-type(3n) {
-        border-right: solid medium;
-    }
-    .sudoku td {
-        border: solid thin;
-        height: 2.4em;
-        width: 2.4em;
-        text-align: center;
-        padding: 0;
-    }
-    .sudoku td.initial {
-/*        background-color:#eef;*/
-        font-weight: bold; 
-    }
-    .hide {
-        display:none;
-    }
-    .grid {
-        float:left;
-    }
-    .log {
-        border: 1px solid grey;
-        width:200px;
-        height:350px;
-        overflow: scroll;
-    }
-    </style>
+    <link rel="stylesheet" href="/css/main.min.css" />
 </head>
 <body>
-<h1>Sudoku helper!</h1>
+<div class="container">
+    <h1>Sudoku solver</h1>
 
-
-<button class="step">Next step</button>
-<button class="solve">Solve</button>
-<button class="pause hide">Pause</button>
-
-<div class="grid"></div>
-<textarea class="log"></textarea>
+    <div class="grid"></div>
+    <textarea class="log"></textarea>
+    <div class="controls"> 
+        <button class="step">Next step</button>
+        <button class="solve">Solve</button>
+        <button class="pause hide">Pause</button>
+    </div>
+</div>
 <script src="/js/app.min.js"></script>
 </body>
 </html>
