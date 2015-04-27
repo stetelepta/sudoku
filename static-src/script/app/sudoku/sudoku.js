@@ -3,7 +3,6 @@
 
 var cell = require('./cell.js');
 var set = require('./set.js');
-var utils = require('./utils.js');
 var smokesignals = require('smokesignals');
 var velocity = require('velocity-animate');
 
@@ -50,19 +49,18 @@ var sudoku = {
          * @returns {undefined}
          */
         solve: function () {
-            this.cells[0][1].setValue(9);
-            // for (var row in this.grid) {
-            //     for (var col in this.grid[row]) {
-            //         var value = this.grid[row][col];
-            //         if (value > 0) {
-            //             // set value
-            //             this.cells[row][col].setValue(value);
+            for (var row in this.grid) {
+                for (var col in this.grid[row]) {
+                    var value = this.grid[row][col];
+                    if (value > 0) {
+                        // set value
+                        this.cells[row][col].setValue(value);
 
-            //             // add to log
-            //             this.log.push({type:'setvalue', row:row, col:col, value:this.grid[row][col]})
-            //         }
-            //     }
-            // }
+                        // add to log
+                        this.log.push({type:'setvalue', row:row, col:col, value:this.grid[row][col]})
+                    }
+                }
+            }
         },
         /**
          * initializes this.cells to a 9x9 2D array
@@ -151,6 +149,12 @@ var sudoku = {
             // first convert cell coordinates to block coordinates (0,0) -› (2,2) (divide by 3, floor result)
             // then to array index (block is wrapped modulo 3)
             return this.blocks[(Math.floor(col/3) * 3) + Math.floor(row/3)];
+        },
+        /**
+         * getter for log
+         */
+        getLog: function() {
+            return this.log.reverse();
         },
         /* eventhandler for cell 'value' events
          */

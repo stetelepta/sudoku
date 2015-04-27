@@ -3,7 +3,8 @@
     /*global document*/
     var sudoku = require("./sudoku/sudoku.js");
     var samples = require("./samples.js");
-    var animate = require("./animate.js");
+    var animationQueue = require("./animate.js");
+    var utils = require('./utils.js');
     var app = {
             /**
              * initialize new instance
@@ -19,10 +20,61 @@
                 this.s.solve();
                 this.s.plotInitial();
 
-                // animate sudoku log
-                animate.log = this.s.log.reverse();
-                animate.start();
-                //this.addEventListeners();
+                this.setupQueue();
+                //animationQueue.start();
+                this.addEventListeners();
+            },
+            /**
+             * loop through sudoku log, an make animation actions for each item
+             */
+            setupQueue: function () {
+                // use logging 
+                animationQueue.logging = true;
+                animationQueue.logElm = document.querySelector('.log');
+
+                var colors = {
+                    neutral: '#fff',
+                    change: '#ff9',
+                    value: '#aaf',
+                    setvalue: '#aaf',
+                    eliminate: '#eef',
+                    changeInitial: 'eef',
+                    valueInitial: '#aaf',
+                    setvalueInitial: '#aaf',
+                    eliminateInitial: '#eef',
+                };
+
+                // loop through log, add animation object to queue
+                var sudokuLog = this.s.getLog();
+
+                for (var i in sudokuLog) {
+                    var item = sudokuLog[i];
+                    var cellElm = document.querySelector('#c' + item.row + item.col);
+                    
+                    if (utils.hasClass(cellElm, "initial")) {
+                        item.type += "Initial";
+                    }
+
+                    if (item.type !== "setvalueInitial" && item.type !== "valueInitial" && item.type !== "change") {
+                        animationQueue.add({
+                            el: cellElm,
+                            properties: {backgroundColor: colors['neutral']},
+                            options: {duration: 0},
+                        });
+                    }
+
+                    var animationItem = {
+                        el: cellElm,
+                        properties: {backgroundColor: colors[item.type]},
+                        options: {duration: 10},
+                        msg: "(" + item.row + ", " + item.col + ")" + ", " + item.type + " " + item.value + "\n",
+                    }
+
+                    if (item.type === "change") {
+                        animationItem.value = item.value;
+                    }
+                    animationQueue.add(animationItem);
+                }
             },
             addEventListeners: function () {
                 this.solveBtn.addEventListener("click", this.onSolveClick.bind(this));
@@ -30,18 +82,18 @@
                 this.stepBtn.addEventListener("click", this.onStepClick.bind(this));
             },
             onSolveClick: function () {
-                this.s.solve();
+                animationQueue.start();
                 this.solveBtn.classList.toggle("hide");
                 //this.stopBtn.classList.toggle("hide");
                 this.pauseBtn.classList.toggle("hide");
             },
             onPauseClick: function () {
-                this.s.pause();
+                animationQueue.pause();
                 this.pauseBtn.classList.toggle("hide");
                 this.solveBtn.classList.toggle("hide");
             },
             onStepClick: function () {
-                this.s.step();
+                animationQueue.step();
             }
         };
     app.initialize();
