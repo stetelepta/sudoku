@@ -30,11 +30,12 @@ var cell = {
             if (index >= 0) {
                 this.p.splice(index, 1);
                 if (this.p.length === 1) {
-                    //console.log('one possibility left: now set value, emit change event');
+                    // one possibility left for this cell, emit change event
                     this.emit('change', {target: this, value: this.getValue() });
+                } else {
+                    this.emit('eliminate', {target: this, value: nr });
                 }
             } else {
-                this.emit('eliminate', {target: this, value: this.getValue() });
                 // would be better to prevent duplicate deletions by different sets, but for now allow it
                 // throw 'IndexError: "' + nr + '"" does not exist in Array p:[' + this.p + ']';
             }
@@ -52,7 +53,7 @@ var cell = {
             }
         },
         setValue: function(nr) {
-            //console.log('setValue, now emit event, this.value:' + this.value);
+            this.emit('value', {target: this, value: nr });
 
             // value is known, now delete all other possibilities
             this.eliminateAll(nr);

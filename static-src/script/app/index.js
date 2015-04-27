@@ -3,6 +3,7 @@
     /*global document*/
     var sudoku = require("./sudoku/sudoku.js");
     var samples = require("./samples.js");
+    var animate = require("./animate.js");
     var app = {
             /**
              * initialize new instance
@@ -14,10 +15,14 @@
             pauseBtn: document.querySelector(".pause"),
             stepBtn: document.querySelector(".step"),
             initialize: function () {
-                this.s = sudoku.create();
-                this.s.setGrid(samples.simple);
+                this.s = sudoku.create({grid: samples.simple});
+                this.s.solve();
                 this.s.plotInitial();
-                this.addEventListeners();
+
+                // animate sudoku log
+                animate.log = this.s.log.reverse();
+                animate.start();
+                //this.addEventListeners();
             },
             addEventListeners: function () {
                 this.solveBtn.addEventListener("click", this.onSolveClick.bind(this));

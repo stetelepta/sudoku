@@ -15,8 +15,14 @@ var sudoku = {
         gridEl: document.querySelector(".grid"),    // div element for plotting
         grid: [],       // 2D array with known values of the sudoku
         stopped: false,
-        queue: [],
-        create: function () {
+        log: [],
+        /**
+         * create new sudoku instance
+         * @param {options}
+         * options['grid'] {2D array with known values of the sudoku}
+         * @returns {sudoku instance}
+         */
+        create: function (options) {
             var self = Object.create(this);
 
             // create sudoku rows, columns and blocks
@@ -27,57 +33,36 @@ var sudoku = {
             // create sudoku cells
             self.createCells();
 
+            // set grid
+            self.setGrid(options.grid);
+
             return self;
         },
+        /**
+         * 
+         */
         setGrid: function (grid) {
             this.grid = grid;
         },
+        /**
+         * solve sudoku by constraint propagation
+         * @param {}
+         * @returns {undefined}
+         */
         solve: function () {
-            this.initQueue();
-            this.start();
-        },
-        initQueue: function () {
-            this.queue = [];
-            for (var row in this.grid) {
-                for (var col in this.grid[row]) {
-                    var value = this.grid[row][col];
-                    if (value > 0) {
-                        this.queue.push({row:row, col:col, value:this.grid[row][col]})
-                    }
-                }
-            }
-            this.queue.reverse();
-        },
-        start: function () {
-            this.stopped = false;
-            this.next();
-        },
-        stop: function () {
-            this.stopped = true;
-            this.initQueue();
-            this.plotInitial();
-        },
-        next: function () {
-            if (this.queue.length > 0 && !this.stopped) {
-                var item = this.queue.pop();
-                this.cells[item.row][item.col].setValue(item.value);
-                setTimeout( this.next.bind(this), 100 );
-            }
-        },
-        pause: function () {
-            this.stopped = true;
-        },
-        play: function () {
-            this.stopped = false;
-            this.next();
-        },
-        step: function () {
-            if (this.queue.length === 0) {
-                this.initQueue();
-            }
-            this.stopped = false;
-            this.next();
-            this.stopped = true;
+            this.cells[0][1].setValue(9);
+            // for (var row in this.grid) {
+            //     for (var col in this.grid[row]) {
+            //         var value = this.grid[row][col];
+            //         if (value > 0) {
+            //             // set value
+            //             this.cells[row][col].setValue(value);
+
+            //             // add to log
+            //             this.log.push({type:'setvalue', row:row, col:col, value:this.grid[row][col]})
+            //         }
+            //     }
+            // }
         },
         /**
          * initializes this.cells to a 9x9 2D array
@@ -97,8 +82,11 @@ var sudoku = {
                     this.getColumn(row,col).addCell(c);
                     this.getBlock(row,col).addCell(c);
 
+                    // add event handlers for logging purposes
                     c.on("change", this.onCellChanged.bind(this));
                     c.on("eliminate", this.onCellElimination.bind(this));
+                    c.on("value", this.onCellSetValue.bind(this));
+
                     // keep track of all cells
                     this.cells[row][col] = c;
                 }
@@ -164,18 +152,20 @@ var sudoku = {
             // then to array index (block is wrapped modulo 3)
             return this.blocks[(Math.floor(col/3) * 3) + Math.floor(row/3)];
         },
+        /* eventhandler for cell 'value' events
+         */
+        onCellSetValue: function (evt) {
+            this.log.push({type:'value', row: evt.target.row, col: evt.target.col, value: evt.value })
+        },
         /* eventhandler for cell changes
          */
         onCellChanged: function (evt) {
-            var cellElm = document.querySelector("#c" + evt.target.row.toString() + evt.target.col.toString());
-            cellElm.innerHTML = evt.target.getValue();
-            this.animateChange(cellElm);
+            this.log.push({type:'change', row: evt.target.row, col: evt.target.col, value: evt.value })
         },
         /* eventhandler for cell possibility changes
          */
         onCellElimination: function (evt) {
-            var cellElm = document.querySelector("#c" + evt.target.row.toString() + evt.target.col.toString());
-            //cellElm.innerHTML = evt.target.p;
+            this.log.push({type:'eliminate', row: evt.target.row, col: evt.target.col, value: evt.value }) 
         },
         /* animate change of a cell
          */
@@ -198,28 +188,6 @@ var sudoku = {
                         output += "<td class=\"initial\" id=\"c" + row + col + "\">" + known + "</td>";                        
                     } else {
                         output += "<td id=\"c" + row + col + "\"></td>"; 
-                    }
-                }
-                output += "</tr>";
-            }
-            output += "</table>";
-            
-            this.gridEl.innerHTML = output;
-        },
-        /* plot solution
-         */
-        plotSolution: function() {
-            var output = '<table class="sudoku">';
-            for (var row=0;row<=8;row++) {
-                output += "<tr>";
-                for (var col=0;col<=8;col++) {
-                    var known = this.grid[row][col];
-                    if (known) {
-                        output += "<td class=\"initial\" id=\"c" + row + col + "\">" + known + "</td>";                        
-                    } else {
-                        var cell = this.cells[row][col];
-                        var val = cell.getValue() || "";
-                        output += "<td id=\"c" + row + col + "\">" + val + "</td>";
                     }
                 }
                 output += "</tr>";
