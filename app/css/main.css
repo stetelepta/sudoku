@@ -1,0 +1,51 @@
+body {
+  color: #B4CA6E;
+  background: #2E2E2E;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; }
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 900px; }
+
+.controls {
+  clear: both; }
+
+table.sudoku {
+  border-collapse: collapse;
+  border: solid medium #afafaf; }
+
+.sudoku tr:nth-of-type(3n) {
+  border-bottom: solid medium #afafaf; }
+
+.sudoku td:nth-of-type(3n) {
+  border-right: solid medium #afafaf; }
+
+.sudoku td {
+  border: solid thin #afafaf;
+  height: 2.4em;
+  width: 2.4em;
+  text-align: center;
+  padding: 0;
+  color: #333; }
+
+.sudoku td.initial {
+  font-weight: bold;
+  color: #B4CA6E; }
+
+.hide {
+  display: none; }
+
+.grid {
+  float: left; }
+
+.log {
+  border: none;
+  width: 200px;
+  height: 370px;
+  margin-left: 15px;
+  overflow: scroll;
+  color: #afafaf;
+  background: #2E2E2E;
+  font-family: "Courier New";
+  font-size: 10px; }
