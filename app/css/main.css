@@ -1,0 +1,414 @@
+/**
+ * A Simple starting styles. WIP
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/**
+ * VARIABLES
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/**
+ * MIXINS etc
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ */
+/**
+ * ELEMENTS ('BASE')
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ */
+/**
+  * @name _sanitize.scss
+  * @description OBJECSS: Modern reset styles
+  *
+  * @version 1.1.0
+  * @author Jonathan Neal
+  * @url https://github.com/jonathantneal/sanitize.css
+  */
+/*! sanitize.css | CC0 Public Domain | github.com/jonathantneal/sanitize.css */
+/*
+ * Normalization
+ */
+:root {
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  overflow-y: scroll;
+  -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+          text-size-adjust: 100%; }
+
+audio:not([controls]) {
+  display: none; }
+
+details {
+  display: block; }
+
+input[type="number"] {
+  width: auto; }
+input[type="search"] {
+  -webkit-appearance: textfield; }
+  input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none; }
+
+main {
+  display: block; }
+
+summary {
+  display: block; }
+
+pre {
+  overflow: auto; }
+
+progress {
+  display: inline-block; }
+
+small {
+  font-size: 75%; }
+
+template {
+  display: none; }
+
+textarea {
+  overflow: auto; }
+
+[hidden] {
+  display: none; }
+
+[unselectable] {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
+
+/*
+ * Universal inheritance
+ */
+*, ::before, ::after {
+  box-sizing: inherit; }
+
+* {
+  font-size: inherit;
+  line-height: inherit; }
+
+::before, ::after {
+  text-decoration: inherit;
+  vertical-align: inherit; }
+
+/*
+ * Opinionated defaults
+ */
+*, ::before, ::after {
+  border-style: solid;
+  border-width: 0; }
+
+* {
+  margin: 0;
+  padding: 0; }
+
+:root {
+  box-sizing: border-box;
+  cursor: default;
+  font: 16px/1.5 sans-serif;
+  text-rendering: optimizeLegibility; }
+
+a {
+  text-decoration: none; }
+
+audio, canvas, iframe, img, svg, video {
+  vertical-align: middle; }
+
+button, input, select, textarea {
+  background-color: transparent; }
+
+button, input, select, textarea {
+  color: inherit;
+  font-family: inherit;
+  font-style: inherit;
+  font-weight: inherit; }
+
+button, input, select, textarea {
+  min-height: 1.5em; }
+
+code, kbd, pre, samp {
+  font-family: monospace, monospace; }
+
+nav ol, nav ul {
+  list-style: none; }
+
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none; }
+  select::-ms-expand {
+    display: none; }
+  select::-ms-value {
+    color: currentColor; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+textarea {
+  resize: vertical; }
+
+::-moz-selection {
+  background-color: #B3D4FC;
+  text-shadow: none; }
+
+::selection {
+  background-color: #B3D4FC;
+  text-shadow: none; }
+
+@media screen {
+  [hidden~="screen"] {
+    display: inherit; }
+  [hidden~="screen"]:not(:active):not(:focus):not(:target) {
+    clip: rect(0 0 0 0) !important;
+    position: absolute !important; } }
+
+:root {
+  background-color: #EFEFEF;
+  color: #000;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 125%;
+  line-height: 1.5; }
+
+a {
+  background-color: transparent;
+  color: #FFB300;
+  -webkit-transition: background-color, color .3s;
+          transition: background-color, color .3s;
+  text-decoration: underline; }
+  a:hover, a:focus, a:active {
+    color: #000;
+    text-decoration: none; }
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: .5rem; }
+  h1 em, h2 em, h3 em, h4 em, h5 em, h6 em, .h1 em, .h2 em, .h3 em, .h4 em, .h5 em, .h6 em {
+    font-style: normal;
+    border-bottom: 1px solid; }
+
+.site-heading, h1, .h1, h2, .h2 {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800; }
+  @media all and (min-width: 48em) {
+    .site-heading, h1, .h1, h2, .h2 {
+      font-size: 1.5rem; } }
+
+/**
+ * Media
+ */
+img, video, iframe {
+  max-width: 100%; }
+
+img {
+  height: auto; }
+
+/**
+ * Basic vertical rythm
+ */
+p, ol, ul, dl, table, form, section, header, main, footer {
+  margin-bottom: 1.5rem; }
+  p:last-child, ol:last-child, ul:last-child, dl:last-child, table:last-child, form:last-child, section:last-child, header:last-child, main:last-child, footer:last-child {
+    margin-bottom: 0; }
+
+/**
+ * BUTTONS
+ */
+button, input[type="button"], .btn {
+  background: #FFB300;
+  color: #FFF;
+  border-radius: 2px;
+  display: inline-block;
+  padding: .125em .5em;
+  font-weight: normal;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 0 .125rem rgba(153, 107, 0, 0.5);
+  cursor: pointer;
+  -webkit-transition: background-color .3s;
+          transition: background-color .3s; }
+  button:hover, button:focus, button:active, input[type="button"]:hover, input[type="button"]:focus, input[type="button"]:active, .btn:hover, .btn:focus, .btn:active {
+    background-color: #000; }
+
+/**
+ * UTILS
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ */
+/*
+ * Hide only visually, but have it available for screen readers:
+ * http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ */
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  /*
+   * Extends the .visuallyhidden class to allow the element
+   * to be focusable when navigated to via the keyboard:
+   * https://www.drupal.org/node/897638
+   */ }
+  .visuallyhidden.is-focusable:active, .visuallyhidden.is-focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto; }
+
+/**
+ * LAYOUT
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ */
+.contain {
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  max-width: 51.2em; }
+
+section[id] {
+  position: relative; }
+  section[id]:after {
+    content: '#' attr(id);
+    position: absolute;
+    right: 0.75rem;
+    top: 0.75rem;
+    opacity: .125;
+    -webkit-transition: opacity .4s;
+            transition: opacity .4s; }
+  section[id]:hover:after, section[id]:focus:after, section[id]:active:after {
+    opacity: 1; }
+
+.skip-link {
+  background-color: transparent;
+  color: #000;
+  display: block;
+  text-align: center; }
+  @media all and (min-width: 48em) {
+    .skip-link {
+      border: 0;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px; } }
+
+.site-header, .site-footer {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  min-height: 20vh;
+  background-color: #0097A7; }
+  .site-header, .site-header a, .site-footer, .site-footer a {
+    color: #FFF; }
+  .site-header .contain, .site-footer .contain {
+    text-align: center; }
+
+.site-heading {
+  font-size: 1.333rem;
+  font-size: 7vw;
+  margin-bottom: 0rem; }
+  .site-heading:after {
+    content: "?";
+    font-size: .5em;
+    display: inline-block;
+    text-align: center;
+    width: 1.7em;
+    border: .1rem solid #FFF;
+    margin-left: .75em;
+    position: relative;
+    top: -.333rem; }
+  @media all and (min-width: 48em) {
+    .site-heading {
+      font-size: 2.25rem;
+      font-size: 3.5vw; } }
+  @media all and (min-width: 64em) {
+    .site-heading {
+      font-size: 2.5rem;
+      font-size: 4vw; } }
+
+.site-heading__sub {
+  font-size: 1.333rem; }
+
+.site-main {
+  min-height: 80vh; }
+  .site-main .contain {
+    background: #FFF;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    margin-top: -2.25rem;
+    box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.1); }
+
+.site-footer {
+  text-align: center;
+  margin-bottom: 0; }
+
+/**
+ * SUDOKU
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ */
+.grid, .log {
+  display: block;
+  text-align: center;
+  width: 100%;
+  margin: 1.5rem auto; }
+
+.log {
+  font-size: .8rem;
+  line-height: 1.5;
+  text-align: left;
+  padding: 0 1.5rem;
+  background: #FFF;
+  color: rgba(0, 0, 0, 0.5);
+  min-height: 10em;
+  box-shadow: 0 0 .5rem 0 rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 0 .5rem 0 rgba(0, 0, 0, 0.1); }
+
+.sudoku {
+  background: #FFF;
+  margin: 0 auto;
+  box-shadow: 0 0 .5rem 0 rgba(0, 0, 0, 0.2); }
+
+.sudoku td {
+  border: solid thin #CCC;
+  height: 2.4em;
+  width: 2.4em;
+  text-align: center; }
+
+.sudoku td.initial {
+  font-weight: bold;
+  color: #000; }
+
+.sudoku td[style] {
+  color: #FFF; }
+
+@media all and (min-width: 48em) {
+  .sudoku-solver {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex; }
+  .grid, .log {
+    -webkit-flex-basis: 50%;
+        -ms-flex-preferred-size: 50%;
+            flex-basis: 50%; }
+  .sudoku {
+    max-width: 21.65em; } }
+
+.controls {
+  text-align: center; }
+  .controls button {
+    margin: 0 .33rem; }
+
+/* DEBUG */
+/**
+ * X
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/**
+ * Y
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/**
+ * Z
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */

@@ -1,32 +1,69 @@
-
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html lang="en" class="no-js">
 <head>
-    <title>Sudoku helper</title>
-    <style>
-    table.sudoku {
-        border-collapse: collapse;
-        border: solid medium;
-    }
-    .sudoku tr:nth-of-type(3n) {
-        border-bottom: solid medium;
-    }
-    .sudoku td:nth-of-type(3n) {
-        border-right: solid medium;
-    }
-    .sudoku td {
-        border: solid thin;
-        height: 2.4em;
-        width: 2.4em;
-        text-align: center;
-        padding: 0;
-    }
-    </style>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+
+	<title>Javascript Sudoku Solver</title>
+
+	<meta name="description" content="Javascript Sudoku Solver" />
+	<meta name="author" content="Salmon Tetelepta <@fink>">
+
+	<link rel="stylesheet" href="/css/main.min.css" />
+
+	<!--
+	'Pragmatic Touch Icons': https://gist.github.com/davidhund/332316f82440ef4377f3
+	Alt: http://realfavicongenerator.net/
+	<link rel="manifest" href="/manifest.json">
+	-->
+<script>with(document.documentElement){className=className.replace(/\bno-js\b/,'js')}</script>
 </head>
 <body>
-<h1>Sudoku helper!</h1>
 
-<div class="grid"></div>
-<script src="/js/app.min.js"></script>
+	<header role="banner" class="site-header">
+		<div class="contain">
+			<h1 class="site-heading">Javascript Sudoku Solver</h1>
+			<p class="site-heading__sub">Let JS do the work for you!</p>
+		</div>
+	</header>
+
+	<main role="main" class="site-main">
+		<div class="contain">
+
+			<div class="controls"> 
+				<button class="step btn--step">Next step</button>
+				<button class="solve btn--solve">Solve</button>
+				<button class="pause btn--pause hide">Pause</button>
+			</div>
+
+			<div class="sudoku-solver">
+				<div class="grid"></div>
+
+				<textarea class="log"></textarea>
+			</div>
+
+			<h2>Some more content</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis beatae, officia? Incidunt eveniet placeat eaque error? <a href="#">Eius culpa</a> iure assumenda numquam, tenetur saepe repudiandae sint eligendi facilis hic porro dolorem.</p>
+
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis beatae, officia? Incidunt eveniet placeat eaque error? Eius culpa iure assumenda numquam, tenetur saepe repudiandae sint eligendi facilis hic porro dolorem.</p>
+
+		</div>
+	</main>
+
+	<footer role="contentinfo" class="site-footer">
+		<div class="contain">
+			<p>
+				This Javascript Sudoku Solver was scripted by Salmon Tetelepta.
+			</p>
+			<p>
+				<a href="https://twitter.com/stetelepta">Twitter</a>, 
+				<a href="https://github.com/stetelepta/sudoku">Github</a>, 
+				<a href="https://github.com/stetelepta/sudoku/issues">Bugs</a>
+			</p>
+		</div>
+	</footer>
+
+	<script src="/js/app.min.js"></script>
 </body>
 </html>

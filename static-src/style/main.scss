@@ -1,0 +1,487 @@
+/**
+ * A Simple starting styles. WIP
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+/**
+ * VARIABLES
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+$pg-width:      51.2em;           // Max Page Width
+$bd-radius:     2px;              //.15em;
+
+
+// Colors
+$cl-black:      #000;
+$cl-white:      #FFF;
+$cl-grey:       #CCC;
+$cl-lightgrey:  #EFEFEF;
+
+// Accent Color
+// Take a look at e.g. 
+// http://www.google.com/design/spec/style/color.html#color-color-palette
+$cl-accent:     #0097A7;            // 700 Cyan
+
+$cl-canvas:     $cl-lightgrey;
+$cl-bg:         $cl-white;
+$cl-text:       $cl-black;
+$cl-border:     $cl-grey;
+
+$cl-link:       #FFB300;            // 600 AMBER
+$cl-link-hover: $cl-black;
+$cl-link-bg:    transparent;
+
+// Fonts
+$fs-base-pc:    125;
+$ff-body:       'Helvetica Neue', Helvetica, Arial, sans-serif;
+$ff-headings:   $ff-body;
+$ln-height:     1.5;
+
+// Spacing
+$mg-default:    $ln-height * 1rem;
+$pd-default:    $ln-height * 1rem;
+
+// Media Queries
+$mq-narrow:     20em; // ~ 320
+$mq-medium:     48em; // ~ 768
+$mq-wide:       64em; // ~ 1024
+
+
+/**
+ * MIXINS etc
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ */
+%shadowed {
+  box-shadow: .25rem .25rem 0 0 rgba($cl-link-bg, .25);
+}
+
+
+/**
+ * ELEMENTS ('BASE')
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ */
+
+@import 'vendor/_sanitize';
+
+:root {
+  background-color: $cl-canvas;
+  color: $cl-text;
+  font-family: $ff-body;
+  font-size: $fs-base-pc * 1%;
+  line-height: $ln-height;
+  // padding: $pd-default;
+}
+
+// body {
+//   // background-color: $cl-bg;
+//   // color: $cl-text;
+
+//   @media all and ( min-width: $mq-medium ) {
+//       padding: $pd-default;
+//   }
+
+//   // font-weight: 300;
+// }
+
+a {
+  background-color: $cl-link-bg;
+  color: $cl-link;
+  transition: background-color, color .3s;
+  text-decoration: underline;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $cl-link-hover;
+    text-decoration: none;
+  }
+
+  // p > & {
+  //   //display: inline-block;
+  //   // padding: 0 .3em;
+  //   padding: .1em .3em;
+  //   border-radius: $bd-radius;
+  // }
+
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: .5rem;
+  // color: $cl-white;
+  em {
+    font-style: normal;
+    border-bottom: 1px solid;
+  }
+}
+.site-heading,
+h1, .h1,
+h2, .h2 {
+  font-family: $ff-headings;
+  font-size: 1.25rem;
+  font-weight: 800;
+  // text-transform: uppercase;
+
+  @media all and ( min-width: $mq-medium ) {
+    font-size: 1.5rem;
+  }
+}
+
+/**
+ * Media
+ */
+img,
+video,
+iframe {
+  // width: 100%;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+/**
+ * Basic vertical rythm
+ */
+p,
+ol,
+ul,
+dl,
+table,
+form,
+section,
+header,
+main,
+footer {
+  margin-bottom: $mg-default;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+
+/**
+ * BUTTONS
+ */
+button, 
+input[type="button"],
+.btn {
+    background: $cl-link;
+    color: $cl-white;
+    border-radius: $bd-radius;
+    display: inline-block;
+    padding: .125em .5em;
+    // margin: 0 .5em;
+    font-weight: normal;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 0 .125rem rgba(darken($cl-link, 20%), .5);
+    cursor: pointer;
+    transition: background-color .3s;
+
+    &:hover,
+    &:focus,
+    &:active {
+        background-color: $cl-link-hover;
+    }
+}
+
+// .btn--step {
+//     &:before {
+//         content: "→";
+//         margin-right: .25em;
+//     }
+// }
+// .btn--solve {
+//     &:before {
+//         content: "✓";
+//         margin-right: .25em;
+//     }
+// }
+// .btn--pause {
+//     &:before {
+//         content: "";
+//         // margin-right: .25em;
+//     }
+// }
+
+
+
+
+/**
+ * UTILS
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ */
+
+/*
+ * Hide only visually, but have it available for screen readers:
+ * http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ */
+.visuallyhidden,
+%visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+
+  /*
+   * Extends the .visuallyhidden class to allow the element
+   * to be focusable when navigated to via the keyboard:
+   * https://www.drupal.org/node/897638
+   */
+
+  &.is-focusable:active,
+  &.is-focusable:focus {
+      clip: auto;
+      height: auto;
+      margin: 0;
+      overflow: visible;
+      position: static;
+      width: auto;
+  }
+}
+
+
+/**
+ * LAYOUT
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ */
+.contain {
+  margin: 0 auto;
+  padding: 0 $pd-default;
+  max-width: $pg-width;
+}
+
+section[id] {
+  position: relative;
+
+  // padding-bottom: $pd-default;
+  // border-bottom: 1px dashed $cl-canvas;
+  // margin-bottom: $mg-default;
+
+  &:after {
+    content: '#' attr(id);
+    position: absolute;
+    right: $mg-default/2;
+    top: $mg-default/2;
+    opacity: .125;
+    transition: opacity .4s;
+  }
+
+  &:hover:after,
+  &:focus:after,
+  &:active:after {
+    opacity: 1;
+  }
+
+}
+
+.skip-link {
+  background-color: transparent;
+  color: $cl-text;
+  // position: absolute;
+  // top: .75*$pd-default;
+  // right: $pd-default;
+  display: block;
+  text-align: center;
+
+  @media all and ( min-width: $mq-medium ) {
+    // Visually Hide but keep accessible
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+}
+
+.site-header,
+.site-footer {
+  // position: relative;
+  // padding-bottom: $pd-default;
+  // border-bottom: .25rem solid $cl-border;
+  // margin-bottom: $mg-default;
+
+    padding-top: $pd-default;
+    padding-bottom: $pd-default;
+    min-height: 20vh;
+
+    background-color: $cl-accent;
+    &, a {
+        color: $cl-white;
+    }
+  
+  .contain {
+    text-align: center;
+  }
+
+}
+
+
+.site-heading {
+  font-size: 1.333rem;
+  font-size: 7vw;
+  margin-bottom: 0rem;
+
+  &:after {
+    content: "?";
+    font-size: .5em;
+    display: inline-block;
+    text-align: center; 
+    width: 1.7em;
+    border: .1rem solid $cl-white;
+    margin-left: .75em;
+    position: relative;
+    top: -.333rem;
+  }
+
+  @media all and ( min-width: $mq-medium ) {
+    font-size: 2.25rem;
+    font-size: 3.5vw;
+  }
+
+  @media all and ( min-width: $mq-wide ) {
+    font-size: 2.5rem;
+    font-size: 4vw;
+  }
+
+}
+.site-heading__sub {
+  font-size: 1.333rem;
+}
+
+// .side-header {
+//     .contain { }
+// }
+
+.site-main {
+    min-height: 80vh;
+
+    .contain {
+        background: $cl-white;
+        padding-top: $pd-default;
+        padding-bottom: $pd-default;
+        margin-top: -1.5*$mg-default;
+        box-shadow: 0 0 .5rem rgba(0, 0, 0, .1);
+    }
+}
+
+
+.site-navigation {}
+
+.site-footer {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+
+
+/**
+ * SUDOKU
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ */
+
+.grid, 
+.log {
+    display: block;
+    text-align: center;
+    width: 100%;
+    margin: $mg-default auto;
+}
+.log {
+    font-size: .8rem;
+    line-height: $ln-height;
+    text-align: left;
+    padding: 0 $pd-default;
+    background: $cl-white;
+    color: rgba($cl-text, .5);
+    min-height: 10em;
+    box-shadow: 0 0 .5rem 0 rgba(0, 0, 0, .1);
+    box-shadow: inset 0 0 .5rem 0 rgba(0, 0, 0, .1);
+}
+
+.sudoku {
+    background: $cl-white;
+    margin: 0 auto;
+    box-shadow: 0 0 .5rem 0 rgba(0, 0, 0, .2);
+}
+.sudoku td {
+    border: solid thin $cl-border;
+    height: 2.4em;
+    width: 2.4em;
+    text-align: center;
+}
+
+.sudoku td.initial {
+    font-weight: bold; 
+    color: $cl-text;
+}
+// TODO: TMP: FIX: override inline styles...
+.sudoku td[style] {
+    color: $cl-white;
+}
+
+// .hide {
+//     display: none;
+// }
+
+@media all and ( min-width: $mq-medium ) {
+    .sudoku-solver {
+        display: flex;
+    }
+
+    .grid, 
+    .log {
+        flex-basis: 50%;
+    }
+    .sudoku {
+        max-width: 21.65em;
+    }
+}
+
+.controls {
+    text-align: center;
+    button {
+        margin: 0 .33rem;
+    }
+}
+
+
+
+
+/* DEBUG */
+// * { outline: 1px dotted rgba(255,0,0,.5); }
+// .contain { outline: 1px solid rgba(0,255,0,.5); }
+
+/**
+ * X
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+/**
+ * Y
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+/**
+ * Z
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
