@@ -1,7 +1,6 @@
 "use strict";
 
 var smokesignals = require('smokesignals');
-var settings = require('./settings.js');
 
 var cell = {
         /**
@@ -13,7 +12,8 @@ var cell = {
             var self = Object.create(this);
             self.row = row;
             self.col = col;
-            self.p = settings.cell.possibilities.slice(0);
+            self.id = String(row) + col;
+            self.p = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
             // make cell a event emitter
             smokesignals.convert(self);
@@ -29,11 +29,11 @@ var cell = {
             var index = this.p.indexOf(nr);
             if (index >= 0) {
                 this.p.splice(index, 1);
+                this.emit('eliminate', {target: this, value: nr });
                 if (this.p.length === 1) {
                     // one possibility left for this cell, emit change event
+                    console.log('Strategy II: nr ' + this.getValue() + ' -› (' + this.row + ', ' + this.col + ')');
                     this.emit('change', {target: this, value: this.getValue() });
-                } else {
-                    this.emit('eliminate', {target: this, value: nr });
                 }
             } else {
                 // would be better to prevent duplicate deletions by different sets, but for now allow it
@@ -46,17 +46,19 @@ var cell = {
          * @returns [deleted item] 
          */
         eliminateAll: function (exceptNr) {
-            for (var i in settings.cell.possibilities) {
-                if (settings.cell.possibilities[i] !== exceptNr) {
-                    this.eliminate(settings.cell.possibilities[i]);
+            for (var nr=1;nr<=9;nr++) {
+                if (nr !== exceptNr) {
+                    this.eliminate(nr);
                 }
             }
         },
         setValue: function(nr) {
-            this.emit('value', {target: this, value: nr });
+            if (this.p.length > 1) {
+                this.emit('value', {target: this, value: nr });
 
-            // value is known, now delete all other possibilities
-            this.eliminateAll(nr);
+                // value is known, now delete all other possibilities
+                this.eliminateAll(nr);            
+            }
         },
         /** getter for the value of the cell
          * @param {}

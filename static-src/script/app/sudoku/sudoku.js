@@ -75,14 +75,14 @@ var sudoku = {
                     var c = cell.create(row, col);
 
                     // add cell to the sets
-                    this.getRow(row,col).addCell(c);
-                    this.getColumn(row,col).addCell(c);
-                    this.getBlock(row,col).addCell(c);
+                    this.getRow(row, col).addCell(c);
+                    this.getColumn(row, col).addCell(c);
+                    this.getBlock(row, col).addCell(c);
 
                     // add event handlers for logging purposes
                     c.on("change", this.onCellChanged.bind(this));
-                    c.on("eliminate", this.onCellElimination.bind(this));
-                    c.on("value", this.onCellSetValue.bind(this));
+                    //c.on("eliminate", this.onCellElimination.bind(this));
+                    //c.on("value", this.onCellSetValue.bind(this));
 
                     // keep track of all cells
                     this.cells[row][col] = c;
@@ -189,6 +189,27 @@ var sudoku = {
             output += "</table>";
             
             this.gridEl.innerHTML = output;
+        },
+        /* plot table with possible values in each cell
+         */
+        plotPossibilities: function () {
+            var output = '<hr><table class="sudoku">';
+            for (var row=0;row<=8;row++) {
+                output += "<tr>";
+                for (var col=0;col<=8;col++) {
+                    var known = this.grid[row][col]
+                    if (known) {
+                        output += "<td class=\"initial\" id=\"c" + row + col + "\">" + known + "</td>";                        
+                    } else {
+                        var poss = this.cells[row][col].p.reduce(function(p, c, i, a) {return p + "," + c });
+                        output += "<td id=\"c" + row + col + "\" class=\"possibilities\">" + poss + "</td>"; 
+                    }
+                }
+                output += "</tr>";
+            }
+            output += "</table>";
+
+            this.gridEl.innerHTML += output;
         }
 };
 

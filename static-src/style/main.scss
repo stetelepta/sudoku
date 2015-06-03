@@ -433,6 +433,10 @@ section[id] {
     text-align: center;
 }
 
+.sudoku td.possibilities {
+    font-size:10px;
+}
+
 .sudoku td.initial {
     font-weight: bold; 
     color: $cl-text;

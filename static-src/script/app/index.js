@@ -16,9 +16,12 @@
             pauseBtn: document.querySelector(".pause"),
             stepBtn: document.querySelector(".step"),
             initialize: function () {
-                this.s = sudoku.create({grid: samples.simple});
+                this.s = sudoku.create({grid: samples.page3});
+                //this.s = sudoku.create({grid: samples.simple});
                 this.s.solve();
                 this.s.plotInitial();
+
+                this.s.plotPossibilities();
 
                 this.setupQueue();
                 //animationQueue.start();
